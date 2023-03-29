@@ -1,8 +1,9 @@
--- You can add your own plugins here or in other files in this directory!
---  I promise not to create any merge conflicts in this directory :)
+-- You can add your own plugins here or in other files in this directory! I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
 return {
+
+  ---------------------Nightfly Theme---------------------------------
 
   {
     'bluz71/vim-nightfly-colors',
@@ -12,7 +13,10 @@ return {
     end,
   },
 
-  { -- Set lualine as statusline
+  ---------------------Lualine----------------------------------------
+
+  {
+    -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
@@ -25,6 +29,72 @@ return {
     },
   },
 
-    'tpope/vim-surround'
+  ---------------------Vim-Surround-----------------------------------
+
+  'tpope/vim-surround',
+
+  ---------------------Autopair---------------------------------------
+
+  {
+    "windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup {}
+    end,
+  },
+
+  ---------------------NEO-TREE---------------------------------------
+
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    version = "v2.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require('neo-tree').setup {
+        -- In FILESYSTEM
+        filesystem = {
+          find_by_full_path_words = true,
+        },
+        -- Tab in FILESYSTEM Conf
+        source_selector = {
+          winbar = true,                         -- toggle to show selector on winbar
+          statusline = false,                    -- toggle to show selector on statusline
+          show_scrolled_off_parent_node = false, -- boolean
+          tab_labels = {
+            -- table
+            filesystem = "  Files ",                             -- string | nil
+            buffers = "  Buffers ",                              -- string | nil
+            git_status = "  Git ",                               -- string | nil
+            diagnostics = " 裂Diagnostics ",                       -- string | nil
+          },
+          content_layout = "start",                                 -- string
+          tabs_layout = "equal",                                    -- string
+          truncation_character = "…",                             -- string
+          tabs_min_width = nil,                                     -- int | nil
+          tabs_max_width = nil,                                     -- int | nil
+          padding = 0,                                              -- int | { left: int, right: int }
+          separator = { left = "▏", right = "▕" },              -- string | { left: string, right: string, override: string | nil }
+          separator_active = nil,                                   -- string | { left: string, right: string, override: string | nil } | nil
+          show_separator_on_edge = false,                           -- boolean
+          highlight_tab = "NeoTreeTabInactive",                     -- string
+          highlight_tab_active = "NeoTreeTabActive",                -- string
+          highlight_background = "NeoTreeTabInactive",              -- string
+          highlight_separator = "NeoTreeTabSeparatorInactive",      -- string
+          highlight_separator_active = "NeoTreeTabSeparatorActive", -- string
+        }
+      }
+    end,
+    -- [[ Configure NeoTree Keymap]]
+    -- See `:help NeoTree`
+    vim.keymap.set('n', '<leader>ot', function() vim.api.nvim_exec('NeoTreeFocusToggle', true) end,
+      { desc = '[O]pen [T]ree Filesystem' }),
+    vim.keymap.set('n', '<leader>of', function() vim.api.nvim_exec('NeoTreeFloatToggle', true) end,
+      { desc = '[O]pen [F]loat Filesystem' }),
+    vim.keymap.set('n', '<leader>og', function() vim.api.nvim_exec('Neotree show git_status right', true) end,
+      { desc = '[O]pen [G]it Status' })
+  }
 
 }
