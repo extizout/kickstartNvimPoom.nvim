@@ -1,6 +1,10 @@
 -- You can add your own plugins here or in other files in this directory! I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
+
+--- [[ Neo-tree Remove Legacy Command]]
+    vim.g.neo_tree_remove_legacy_commands = 1
+
 return {
 
   ---------------------Nightfly Theme---------------------------------
@@ -56,8 +60,11 @@ return {
       require('neo-tree').setup {
         -- In FILESYSTEM
         filesystem = {
+          follow_current_file = true,
+          hijack_netrw_behavior = "open_current",
           find_by_full_path_words = true,
         },
+
         -- Tab in FILESYSTEM Conf
         source_selector = {
           winbar = true,                         -- toggle to show selector on winbar
@@ -87,13 +94,14 @@ return {
         }
       }
     end,
+
     -- [[ Configure NeoTree Keymap]]
     -- See `:help NeoTree`
-    vim.keymap.set('n', '<leader>ot', function() vim.api.nvim_exec('NeoTreeFocusToggle', true) end,
+    vim.keymap.set('n', '<leader>ot','<cmd>Neotree focus filesystem left toggle reveal_force_cwd<cr>' ,
       { desc = '[O]pen [T]ree Filesystem' }),
-    vim.keymap.set('n', '<leader>of', function() vim.api.nvim_exec('NeoTreeFloatToggle', true) end,
+    vim.keymap.set('n', '<leader>of', '<cmd>Neotree focus float toggle<cr>',
       { desc = '[O]pen [F]loat Filesystem' }),
-    vim.keymap.set('n', '<leader>og', function() vim.api.nvim_exec('Neotree show git_status right', true) end,
+    vim.keymap.set('n', '<leader>og', '<cmd>Neotree show git_status right toggle<cr>',
       { desc = '[O]pen [G]it Status' })
   }
 
