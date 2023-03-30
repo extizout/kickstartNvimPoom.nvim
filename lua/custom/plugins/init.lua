@@ -6,8 +6,7 @@
     vim.g.neo_tree_remove_legacy_commands = 1
 --- [[ Nightfly Vim.Global]]
 vim.g.nightflyCursorColor = true
-vim.g.nightflyNormalFloat = false
-vim.g.nightflyUnderlineMatchParen = true
+
 return {
 
   ---------------------Nightfly Theme---------------------------------
