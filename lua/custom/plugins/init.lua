@@ -19,7 +19,7 @@ return {
     vim.keymap.set('c', 'jk', '<ESC>', { desc = 'ESC' })
   },
 
-  ---------------------Nvim-telescope-fzf-native install Windo ----------
+  ---------------------Nvim-telescope-fzf-native install Windows ----------
 
   {
     'nvim-telescope/telescope-fzf-native.nvim',
