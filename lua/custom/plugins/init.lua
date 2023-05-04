@@ -166,5 +166,10 @@ return {
       }
     end,
     dependencies = { {'nvim-tree/nvim-web-devicons'} }
-  }
+  },
+ 
+  ----------------------Colorizer.lua--------------------------------------
+
+  'norcalli/nvim-colorizer.lua',
+
 }
