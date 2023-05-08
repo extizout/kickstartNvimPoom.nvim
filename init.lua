@@ -198,6 +198,7 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
+vim.g.nightflyCursorColor = true
 -- Set cursorline
 vim.o.cursorline = true
 

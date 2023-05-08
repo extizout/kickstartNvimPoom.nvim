@@ -148,5 +148,11 @@ return {
       }
     end,
     dependencies = { {'nvim-tree/nvim-web-devicons'}}
-  }
+  },
+
+  ---------------------Keymap For Gitsigns-----------------------------
+
+vim.keymap.set('n', '[g', '<cmd>Gitsigns prev_hunk<cr>', { desc = "Go to previous [G]it Hunk." }),
+vim.keymap.set('n', ']g', '<cmd>Gitsigns next_hunk<cr>', { desc = "Go to next [G]it Hunk." })
+
 }
