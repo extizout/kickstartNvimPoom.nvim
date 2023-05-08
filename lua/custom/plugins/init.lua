@@ -17,7 +17,7 @@ return {
     vim.keymap.set('i', 'jk', '<ESC>', { desc = 'ESC' }),
     -- Map jk to ESC in Command Mode.
     vim.keymap.set('c', 'jk', '<ESC>', { desc = 'ESC' }),
-	  ---------------------Keymap For Gitsigns-----------------------------
+  ---------------------Keymap For Gitsigns-----------------------------
 
     vim.keymap.set('n', '[g', '<cmd>Gitsigns prev_hunk<cr>', { desc = "Go to previous [G]it Hunk." }),
     vim.keymap.set('n', ']g', '<cmd>Gitsigns next_hunk<cr>', { desc = "Go to next [G]it Hunk." })
