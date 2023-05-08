@@ -3,11 +3,33 @@
 -- See the kickstart.nvim README for more information
 
 --- [[ Neo-tree Remove Legacy Command]]
-    vim.g.neo_tree_remove_legacy_commands = 1
+vim.g.neo_tree_remove_legacy_commands = 1
 --- [[ Nightfly Vim.Global]]
 vim.g.nightflyCursorColor = true
 
 return {
+
+  ---------------------Personal NeoVim Keymap ---------------------------------
+
+  {
+    -- [[ Native Neovim ]]
+    -- Map jk to ESC in Insert Mode.
+    vim.keymap.set('i', 'jk', '<ESC>', { desc = 'ESC' }),
+    -- Map jk to ESC in Command Mode.
+    vim.keymap.set('c', 'jk', '<ESC>', { desc = 'ESC' }),
+	  ---------------------Keymap For Gitsigns-----------------------------
+
+    vim.keymap.set('n', '[g', '<cmd>Gitsigns prev_hunk<cr>', { desc = "Go to previous [G]it Hunk." }),
+    vim.keymap.set('n', ']g', '<cmd>Gitsigns next_hunk<cr>', { desc = "Go to next [G]it Hunk." })
+  },
+
+  ---------------------Nvim-telescope-fzf-native install Windows ----------
+
+  --{
+    --'nvim-telescope/telescope-fzf-native.nvim',
+    --build =
+    --'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  --},
 
   ---------------------Nightfly Theme---------------------------------
 
@@ -99,9 +121,9 @@ return {
 
     -- [[ Configure NeoTree Keymap]]
     -- See `:help NeoTree`
-    vim.keymap.set('n', '<leader>ot','<cmd>Neotree focus filesystem left toggle reveal_force_cwd<cr>' ,
+    vim.keymap.set('n', '<leader>ot', '<cmd>Neotree focus filesystem left toggle reveal_force_cwd<cr>',
       { desc = '[O]pen [T]ree Filesystem' }),
-    vim.keymap.set('n', '<leader>of', '<cmd>Neotree focus float toggle<cr>',
+    vim.keymap.set('n', '<leader>of', '<cmd>Neotree focus filesystem float toggle<cr>',
       { desc = '[O]pen [F]loat Filesystem' }),
     vim.keymap.set('n', '<leader>og', '<cmd>Neotree show git_status right toggle<cr>',
       { desc = '[O]pen [G]it Status' })
@@ -114,12 +136,12 @@ return {
     event = 'VimEnter',
     config = function()
       require('dashboard').setup {
-    -- [[ Configure DashBoard]]
-    -- See `:help DashBoard`
+        -- [[ Configure DashBoard ]]
+        -- See `:help DashBoard`
         theme = 'hyper',
         config = {
           week_header = {
-           enable = true,
+            enable = true,
           },
           shortcut = {
             { desc = ' Update', group = '@property', action = 'Lazy update', key = 'u' },
@@ -147,12 +169,11 @@ return {
         },
       }
     end,
-    dependencies = { {'nvim-tree/nvim-web-devicons'}}
+    dependencies = { {'nvim-tree/nvim-web-devicons'} }
   },
+ 
+  ----------------------Colorizer.lua--------------------------------------
 
-  ---------------------Keymap For Gitsigns-----------------------------
-
-vim.keymap.set('n', '[g', '<cmd>Gitsigns prev_hunk<cr>', { desc = "Go to previous [G]it Hunk." }),
-vim.keymap.set('n', ']g', '<cmd>Gitsigns next_hunk<cr>', { desc = "Go to next [G]it Hunk." })
+  'norcalli/nvim-colorizer.lua',
 
 }
