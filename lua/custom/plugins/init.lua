@@ -17,10 +17,20 @@ return {
     vim.keymap.set('i', 'jk', '<ESC>', { desc = 'ESC' }),
     -- Map jk to ESC in Command Mode.
     vim.keymap.set('c', 'jk', '<ESC>', { desc = 'ESC' }),
+
   ---------------------Keymap For Gitsigns-----------------------------
 
     vim.keymap.set('n', '[g', '<cmd>Gitsigns prev_hunk<cr>', { desc = "Go to previous [G]it Hunk." }),
-    vim.keymap.set('n', ']g', '<cmd>Gitsigns next_hunk<cr>', { desc = "Go to next [G]it Hunk." })
+    vim.keymap.set('n', ']g', '<cmd>Gitsigns next_hunk<cr>', { desc = "Go to next [G]it Hunk." }),
+
+  ---------------------Keymap For Neo Tree-----------------------------
+
+    vim.keymap.set('n', '<leader>ot', '<cmd>Neotree focus filesystem left toggle reveal_force_cwd<cr>',
+      { desc = '[O]pen [T]ree Filesystem' }),
+    vim.keymap.set('n', '<leader>of', '<cmd>Neotree focus filesystem float toggle<cr>',
+      { desc = '[O]pen [F]loat Filesystem' }),
+    vim.keymap.set('n', '<leader>og', '<cmd>Neotree show git_status right toggle<cr>',
+      { desc = '[O]pen [G]it Status' }),
   },
 
   ---------------------Nvim-telescope-fzf-native install Windows ----------
@@ -88,45 +98,17 @@ return {
           hijack_netrw_behavior = "open_current",
           find_by_full_path_words = true,
         },
-
-        -- Tab in FILESYSTEM Conf
-        source_selector = {
-          winbar = true,                         -- toggle to show selector on winbar
-          statusline = false,                    -- toggle to show selector on statusline
-          show_scrolled_off_parent_node = false, -- boolean
-          tab_labels = {
-            -- table
-            filesystem = "  Files ",                             -- string | nil
-            buffers = "  Buffers ",                              -- string | nil
-            git_status = "  Git ",                               -- string | nil
-            diagnostics = " 裂Diagnostics ",                       -- string | nil
+        window = {
+          position = "left",
+          width = 30,
+          mappings = {
+            ['e'] = function () vim.api.nvim_exec('Neotree focus filesystem left', true) end,
+            ['b'] = function () vim.api.nvim_exec('Neotree focus buffers left', true) end,
+            ['g'] = function () vim.api.nvim_exec('Neotree focus git_status left', true) end,
           },
-          content_layout = "start",                                 -- string
-          tabs_layout = "equal",                                    -- string
-          truncation_character = "…",                             -- string
-          tabs_min_width = nil,                                     -- int | nil
-          tabs_max_width = nil,                                     -- int | nil
-          padding = 0,                                              -- int | { left: int, right: int }
-          separator = { left = "▏", right = "▕" },              -- string | { left: string, right: string, override: string | nil }
-          separator_active = nil,                                   -- string | { left: string, right: string, override: string | nil } | nil
-          show_separator_on_edge = false,                           -- boolean
-          highlight_tab = "NeoTreeTabInactive",                     -- string
-          highlight_tab_active = "NeoTreeTabActive",                -- string
-          highlight_background = "NeoTreeTabInactive",              -- string
-          highlight_separator = "NeoTreeTabSeparatorInactive",      -- string
-          highlight_separator_active = "NeoTreeTabSeparatorActive", -- string
-        }
+        },
       }
     end,
-
-    -- [[ Configure NeoTree Keymap]]
-    -- See `:help NeoTree`
-    vim.keymap.set('n', '<leader>ot', '<cmd>Neotree focus filesystem left toggle reveal_force_cwd<cr>',
-      { desc = '[O]pen [T]ree Filesystem' }),
-    vim.keymap.set('n', '<leader>of', '<cmd>Neotree focus filesystem float toggle<cr>',
-      { desc = '[O]pen [F]loat Filesystem' }),
-    vim.keymap.set('n', '<leader>og', '<cmd>Neotree show git_status right toggle<cr>',
-      { desc = '[O]pen [G]it Status' })
   },
 
   ----------------------Dashboard--------------------------------------
