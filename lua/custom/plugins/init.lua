@@ -18,12 +18,12 @@ return {
     -- Map jk to ESC in Command Mode.
     vim.keymap.set('c', 'jk', '<ESC>', { desc = 'ESC' }),
 
-  ---------------------Keymap For Gitsigns-----------------------------
+    ---------------------Keymap For Gitsigns-----------------------------
 
     vim.keymap.set('n', '[g', '<cmd>Gitsigns prev_hunk<cr>', { desc = "Go to previous [G]it Hunk." }),
     vim.keymap.set('n', ']g', '<cmd>Gitsigns next_hunk<cr>', { desc = "Go to next [G]it Hunk." }),
 
-  ---------------------Keymap For Neo Tree-----------------------------
+    ---------------------Keymap For Neo Tree-----------------------------
 
     vim.keymap.set('n', '<leader>ot', '<cmd>Neotree focus filesystem left toggle reveal_force_cwd<cr>',
       { desc = '[O]pen [T]ree Filesystem' }),
@@ -36,9 +36,9 @@ return {
   ---------------------Nvim-telescope-fzf-native install Windows ----------
 
   --{
-    --'nvim-telescope/telescope-fzf-native.nvim',
-    --build =
-    --'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  --'nvim-telescope/telescope-fzf-native.nvim',
+  --build =
+  --'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   --},
 
   ---------------------Nightfly Theme---------------------------------
@@ -69,7 +69,16 @@ return {
 
   ---------------------Vim-Surround-----------------------------------
 
-  'tpope/vim-surround',
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
 
   ---------------------Autopair---------------------------------------
 
@@ -102,9 +111,9 @@ return {
           position = "left",
           width = 30,
           mappings = {
-            ['e'] = function () vim.api.nvim_exec('Neotree focus filesystem left', true) end,
-            ['b'] = function () vim.api.nvim_exec('Neotree focus buffers left', true) end,
-            ['g'] = function () vim.api.nvim_exec('Neotree focus git_status left', true) end,
+            ['e'] = function() vim.api.nvim_exec('Neotree focus filesystem left', true) end,
+            ['b'] = function() vim.api.nvim_exec('Neotree focus buffers left', true) end,
+            ['g'] = function() vim.api.nvim_exec('Neotree focus git_status left', true) end,
           },
         },
       }
@@ -151,9 +160,9 @@ return {
         },
       }
     end,
-    dependencies = { {'nvim-tree/nvim-web-devicons'} }
+    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
   },
- 
+
   ----------------------Colorizer.lua--------------------------------------
 
   'norcalli/nvim-colorizer.lua',
