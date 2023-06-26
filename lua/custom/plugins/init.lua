@@ -165,6 +165,22 @@ return {
 
   ----------------------Colorizer.lua--------------------------------------
 
-  'norcalli/nvim-colorizer.lua',
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require 'colorizer'.setup {
+        css = {
+          css_fn = true,
+          css = true,
+          names = true,
+        },
+        'javascript',
+        'html',
+        'markdown',
+        'python',
+        'vue'
+      }
+    end
+  },
 
 }
