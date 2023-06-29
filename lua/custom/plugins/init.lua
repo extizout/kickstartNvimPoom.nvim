@@ -18,6 +18,11 @@ return {
     -- Map jk to ESC in Command Mode.
     vim.keymap.set('c', 'jk', '<ESC>', { desc = 'ESC' }),
 
+    -- Map ]t for Change to next tab.
+    vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Change to next [t]ab.' }),
+    -- Map [t for Change to next tab.
+    vim.keymap.set('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Change to previous [t]ab.' }),
+
     ---------------------Keymap For Gitsigns-----------------------------
 
     vim.keymap.set('n', '[g', '<cmd>Gitsigns prev_hunk<cr>', { desc = "Go to previous [G]it Hunk." }),
