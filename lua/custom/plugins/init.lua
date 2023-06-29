@@ -188,4 +188,17 @@ return {
     end
   },
 
+  ----------------------Carbon-Now(code-captureViaUrl)--------------------------------------
+
+  {
+    "ellisonleao/carbon-now.nvim",
+    opts = {
+      -- Browser
+      open_cmd = "google-chrome",
+      options = {
+        theme = "Night Owl"
+      }
+    },
+    cmd = "CarbonNow"
+  }
 }
