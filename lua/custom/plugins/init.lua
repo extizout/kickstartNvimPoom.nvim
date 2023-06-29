@@ -25,17 +25,14 @@ return {
 
     ---------------------Keymap For Gitsigns-----------------------------
 
-    vim.keymap.set('n', '[g', '<cmd>Gitsigns prev_hunk<cr>', { desc = "Go to previous [G]it Hunk." }),
-    vim.keymap.set('n', ']g', '<cmd>Gitsigns next_hunk<cr>', { desc = "Go to next [G]it Hunk." }),
+    vim.keymap.set('n', '[g', '<cmd>Gitsigns prev_hunk<cr>', { desc = 'Go to previous [G]it Hunk.' }),
+    vim.keymap.set('n', ']g', '<cmd>Gitsigns next_hunk<cr>', { desc = 'Go to next [G]it Hunk.' }),
 
     ---------------------Keymap For Neo Tree-----------------------------
 
-    vim.keymap.set('n', '<leader>ot', '<cmd>Neotree focus filesystem left toggle reveal_force_cwd<cr>',
-      { desc = '[O]pen [T]ree Filesystem' }),
-    vim.keymap.set('n', '<leader>of', '<cmd>Neotree focus filesystem float toggle<cr>',
-      { desc = '[O]pen [F]loat Filesystem' }),
-    vim.keymap.set('n', '<leader>og', '<cmd>Neotree show git_status right toggle<cr>',
-      { desc = '[O]pen [G]it Status' }),
+    vim.keymap.set('n', '<leader>ot', '<cmd>Neotree focus filesystem left toggle reveal_force_cwd<cr>', { desc = '[O]pen [T]ree Filesystem' }),
+    vim.keymap.set('n', '<leader>of', '<cmd>Neotree focus filesystem float toggle<cr>', { desc = '[O]pen [F]loat Filesystem' }),
+    vim.keymap.set('n', '<leader>og', '<cmd>Neotree show git_status right toggle<cr>', { desc = '[O]pen [G]it Status' }),
   },
 
   ---------------------Nvim-telescope-fzf-native install Windows ----------
@@ -75,50 +72,56 @@ return {
   ---------------------Vim-Surround-----------------------------------
 
   {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    'kylechui/nvim-surround',
+    version = '*', -- Use for stability; omit to use `main` branch for the latest features
+    event = 'VeryLazy',
     config = function()
-      require("nvim-surround").setup({
+      require('nvim-surround').setup {
         -- Configuration here, or leave empty to use defaults
-      })
-    end
+      }
+    end,
   },
 
   ---------------------Autopair---------------------------------------
 
   {
-    "windwp/nvim-autopairs",
+    'windwp/nvim-autopairs',
     config = function()
-      require("nvim-autopairs").setup {}
+      require('nvim-autopairs').setup {}
     end,
   },
 
   ---------------------NEO-TREE---------------------------------------
 
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    version = "v2.x",
+    'nvim-neo-tree/neo-tree.nvim',
+    version = 'v2.x',
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'MunifTanjim/nui.nvim',
     },
     config = function()
       require('neo-tree').setup {
         -- In FILESYSTEM
         filesystem = {
           follow_current_file = true,
-          hijack_netrw_behavior = "open_current",
+          hijack_netrw_behavior = 'open_current',
           find_by_full_path_words = true,
         },
         window = {
-          position = "left",
+          position = 'left',
           width = 30,
           mappings = {
-            ['e'] = function() vim.api.nvim_exec('Neotree focus filesystem left', true) end,
-            ['b'] = function() vim.api.nvim_exec('Neotree focus buffers left', true) end,
-            ['g'] = function() vim.api.nvim_exec('Neotree focus git_status left', true) end,
+            ['e'] = function()
+              vim.api.nvim_exec('Neotree focus filesystem left', true)
+            end,
+            ['b'] = function()
+              vim.api.nvim_exec('Neotree focus buffers left', true)
+            end,
+            ['g'] = function()
+              vim.api.nvim_exec('Neotree focus git_status left', true)
+            end,
           },
         },
       }
@@ -165,7 +168,7 @@ return {
         },
       }
     end,
-    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+    dependencies = { { 'nvim-tree/nvim-web-devicons' } },
   },
 
   ----------------------Colorizer.lua--------------------------------------
@@ -173,7 +176,7 @@ return {
   {
     'norcalli/nvim-colorizer.lua',
     config = function()
-      require 'colorizer'.setup {
+      require('colorizer').setup {
         css = {
           css_fn = true,
           css = true,
@@ -183,66 +186,64 @@ return {
         'html',
         'markdown',
         'python',
-        'vue'
+        'vue',
       }
-    end
+    end,
   },
 
   ----------------------Carbon-Now(code-captureViaUrl)--------------------------------------
 
   {
-    "ellisonleao/carbon-now.nvim",
+    'ellisonleao/carbon-now.nvim',
     opts = {
       -- Browser
-      open_cmd = "google-chrome",
+      open_cmd = 'google-chrome',
       options = {
-        theme = "Night Owl"
-      }
+        theme = 'Night Owl',
+      },
     },
-    cmd = "CarbonNow"
+    cmd = 'CarbonNow',
   },
 
   ----------------------Mason-Null.ls--------------------------------------
 
   {
-    "jay-babu/mason-null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    'jay-babu/mason-null-ls.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      "williamboman/mason.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
+      'williamboman/mason.nvim',
+      'jose-elias-alvarez/null-ls.nvim',
     },
     config = function()
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-      local formatting = require("null-ls").builtins.formatting
+      local formatting = require('null-ls').builtins.formatting
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
       -- local diagnostics = require("null-ls").builtins.diagnostics
 
-      require("mason").setup()
-      require("mason-null-ls").setup({
+      require('mason').setup()
+      require('mason-null-ls').setup {
         ensure_installed = {
-          "eslint_d",
-          "prettier",
-          "prettierd",
-          "stylua"
+          'eslint_d',
+          'prettier',
+          'prettierd',
+          'stylua',
         },
         automatic_installation = false,
-        handlers = {
-        }
-      })
-      require("null-ls").setup({
+        handlers = {},
+      }
+      require('null-ls').setup {
         sources = {
           formatting.prettierd.with {
             -- Filetypes for use prettier formatting.
-            filetypes = { "html", "json", "yaml", "markdown", "vue" },
+            filetypes = { 'html', 'json', 'yaml', 'markdown', 'vue' },
             -- Arg for formatting
-            extra_args = { "--no-semi", "--jsx-single-quote" },
+            extra_args = { '--no-semi', '--jsx-single-quote' },
           },
           formatting.stylua.with {
-            filetypes = { "lua" }
-
-          }
-        }
-      })
+            filetypes = { 'lua' },
+          },
+        },
+      }
     end,
-  }
+  },
 }
