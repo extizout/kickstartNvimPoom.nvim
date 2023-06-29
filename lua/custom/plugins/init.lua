@@ -200,5 +200,49 @@ return {
       }
     },
     cmd = "CarbonNow"
+  },
+
+  ----------------------Mason-Null.ls--------------------------------------
+
+  {
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
+    },
+    config = function()
+      -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
+      local formatting = require("null-ls").builtins.formatting
+      -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
+      -- local diagnostics = require("null-ls").builtins.diagnostics
+
+      require("mason").setup()
+      require("mason-null-ls").setup({
+        ensure_installed = {
+          "eslint_d",
+          "prettier",
+          "prettierd",
+          "stylua"
+        },
+        automatic_installation = false,
+        handlers = {
+        }
+      })
+      require("null-ls").setup({
+        sources = {
+          formatting.prettierd.with {
+            -- Filetypes for use prettier formatting.
+            filetypes = { "html", "json", "yaml", "markdown", "vue" },
+            -- Arg for formatting
+            extra_args = { "--no-semi", "--jsx-single-quote" },
+          },
+          formatting.stylua.with {
+            filetypes = { "lua" }
+
+          }
+        }
+      })
+    end,
   }
 }
