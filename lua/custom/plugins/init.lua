@@ -17,6 +17,10 @@ return {
     vim.keymap.set('i', 'jk', '<ESC>', { desc = 'ESC' }),
     -- Map jk to ESC in Command Mode.
     vim.keymap.set('c', 'jk', '<ESC>', { desc = 'ESC' }),
+    -- Map ESC to exit terminal mode.
+    vim.keymap.set('t', '<esc>', '<C-\\><C-n>', { desc = '[E]xit terminal mode' }),
+    -- Map jk to exit terminal mode.
+    vim.keymap.set('t', 'jk', '<C-\\><C-n>', { desc = '[E]xit terminal mode' }),
 
     -- Map ]t for Change to next tab.
     vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Change to next [t]ab.' }),
@@ -266,12 +270,14 @@ return {
   ----------------------ToggleTerm--------------------------------------
 
   {
+
     -- Command
     -- <count>ToggleTerm dir= size= direction=
     -- <count>TermExec cmd="" direction=
     --  TermSelect (open prompt for select terminal)
     --  ToggleTermSetName (name terminal)
     --  ToggleTermToggleAll (Toggle all terminals)
+
     'akinsho/toggleterm.nvim',
     version = '*',
     opts = {
