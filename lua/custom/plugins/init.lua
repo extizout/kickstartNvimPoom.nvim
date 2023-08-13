@@ -66,6 +66,22 @@ return {
         component_separators = '|',
         section_separators = '',
       },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diff', 'diagnostics' },
+        lualine_c = { 'filename' },
+        lualine_x = { 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' },
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'filename' },
+        lualine_x = { 'location' },
+        lualine_y = { 'b:toggle_number' },
+        lualine_z = {},
+      },
     },
   },
 
@@ -245,5 +261,28 @@ return {
         },
       }
     end,
+  },
+
+  ----------------------ToggleTerm--------------------------------------
+
+  {
+    -- Command
+    -- <count>ToggleTerm dir= size= direction=
+    -- <count>TermExec cmd="" direction=
+    --  TermSelect (open prompt for select terminal)
+    --  ToggleTermSetName (name terminal)
+    --  ToggleTermToggleAll (Toggle all terminals)
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    opts = {
+      -- Map for toggle terminal (previous opened terminal)
+      open_mapping = [[<c-t>]],
+      -- Default size of terminal
+      size = 50,
+      direction = 'vertical',
+      float_opts = {
+        border = 'curved',
+      },
+    },
   },
 }
