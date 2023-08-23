@@ -270,7 +270,6 @@ return {
           formatting.stylua.with {
             filetypes = { 'lua' },
           },
-          -- formatting.google_java_format,
 
           -- Diagnostics
         },
