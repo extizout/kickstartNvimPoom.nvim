@@ -430,8 +430,8 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
-  -- golangci_lint_ls = {},
+  gopls = {},
+  golangci_lint_ls = {},
   -- pyright = {},
   -- rust_analyzer = {},
   cssls = {},

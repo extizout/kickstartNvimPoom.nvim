@@ -253,7 +253,9 @@ return {
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
       local formatting = require('null-ls').builtins.formatting
       -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-      -- local diagnostics = require("null-ls").builtins.diagnostics
+      local diagnostics = require('null-ls').builtins.diagnostics
+
+      local code_action = require('null-ls').builtins.code_actions
 
       require('mason').setup()
       require('mason-null-ls').setup {
@@ -264,19 +266,27 @@ return {
           'stylua',
         },
         automatic_installation = false,
-        handlers = {},
+        handlers = {
+         -- function() end, -- disables automatic setup of all null-ls sources
+        },
       }
       require('null-ls').setup {
         sources = {
+          -- Code Action
+          code_action.eslint_d,
+
+          -- Formatter
           formatting.prettierd.with {
             -- Filetypes for use prettier formatting.
-            filetypes = { 'html', 'json', 'yaml', 'markdown', 'vue' },
+            filetypes = { 'html', 'json', 'yaml', 'markdown', 'vue', 'javascript' },
             -- Arg for formatting
             extra_args = { '--no-semi', '--jsx-single-quote' },
           },
           formatting.stylua.with {
             filetypes = { 'lua' },
           },
+
+          -- Diagnostics
         },
       }
     end,
