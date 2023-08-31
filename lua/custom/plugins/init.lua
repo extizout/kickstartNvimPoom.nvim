@@ -7,6 +7,20 @@ vim.g.neo_tree_remove_legacy_commands = 1
 --- [[ Nightfly Vim.Global]]
 vim.g.nightflyCursorColor = true
 
+--- Window PowerShell
+local powershell_options = {
+  shell = vim.fn.executable "pwsh" == 1 and "pwsh" or "powershell",
+  shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
+  shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
+  shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
+  shellquote = "",
+  shellxquote = "",
+}
+
+for option, value in pairs(powershell_options) do
+  vim.opt[option] = value
+end
+
 return {
 
   ---------------------Personal NeoVim Keymap ---------------------------------
@@ -17,6 +31,12 @@ return {
     vim.keymap.set('i', 'jk', '<ESC>', { desc = 'ESC' }),
     -- Map jk to ESC in Command Mode.
     vim.keymap.set('c', 'jk', '<ESC>', { desc = 'ESC' }),
+    -- Map ESC to exit terminal mode.
+    vim.keymap.set('t', '<esc>', '<C-\\><C-n>', { desc = '[E]xit terminal mode' }),
+    -- Map jk to exit terminal mode.
+    vim.keymap.set('t', 'jk', '<C-\\><C-n>', { desc = '[E]xit terminal mode' }),
+    vim.keymap.set('i', '<c-z>', '?', { desc = 'question mark' }),
+    vim.keymap.set('i', '<c-s>', '/', { desc = 'Slash Mark' }),
 
     -- Map ]t for Change to next tab.
     vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Change to next [t]ab.' }),
@@ -38,9 +58,8 @@ return {
   ---------------------Nvim-telescope-fzf-native install Windows ----------
 
   {
-  'nvim-telescope/telescope-fzf-native.nvim',
-  build =
-  'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
   },
 
   ---------------------Nightfly Theme---------------------------------
@@ -65,6 +84,22 @@ return {
         theme = 'nightfly',
         component_separators = '|',
         section_separators = '',
+        sections = {
+          lualine_a = { 'mode' },
+          lualine_b = { 'branch', 'diff', 'diagnostics' },
+          lualine_c = { 'filename' },
+          lualine_x = { 'filetype' },
+          lualine_y = { 'progress' },
+          lualine_z = { 'location' },
+        },
+        inactive_sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = { 'filename' },
+          lualine_x = { 'location' },
+          lualine_y = { 'b:toggle_number' },
+          lualine_z = {},
+        },
       },
     },
   },
@@ -245,5 +280,30 @@ return {
         },
       }
     end,
+  },
+
+  ----------------------ToggleTerm--------------------------------------
+
+  {
+
+    -- Command
+    -- <count>ToggleTerm dir= size= direction=
+    -- <count>TermExec cmd="" direction=
+    --  TermSelect (open prompt for select terminal)
+    --  ToggleTermSetName (name terminal)
+    --  ToggleTermToggleAll (Toggle all terminals)
+
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    opts = {
+      -- Map for toggle terminal (previous opened terminal)
+      open_mapping = [[<c-t>]],
+      -- Default size of terminal
+      size = 50,
+      direction = 'vertical',
+      float_opts = {
+        border = 'curved',
+      },
+    },
   },
 }
