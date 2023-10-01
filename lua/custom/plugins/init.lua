@@ -20,7 +20,7 @@ return {
     -- Map jk to ESC in Command Mode.
     vim.keymap.set('c', 'jk', '<ESC>', { desc = 'ESC' }),
     -- Map ESC to exit terminal mode.
-    vim.keymap.set('t', '<esc>', '<C-\\><C-n>', { desc = '[E]xit terminal mode' }),
+    -- vim.keymap.set('t', '<esc>', '<C-\\><C-n>', { desc = '[E]xit terminal mode' }),
     -- Map jk to exit terminal mode.
     vim.keymap.set('t', 'jk', '<C-\\><C-n>', { desc = '[E]xit terminal mode' }),
 
@@ -254,7 +254,7 @@ return {
         },
         automatic_installation = false,
         handlers = {
-         -- function() end, -- disables automatic setup of all null-ls sources
+          -- function() end, -- disables automatic setup of all null-ls sources
         },
       }
       require('null-ls').setup {
@@ -292,15 +292,36 @@ return {
 
     'akinsho/toggleterm.nvim',
     version = '*',
-    opts = {
+    config = function()
+      require('toggleterm').setup {
       -- Map for toggle terminal (previous opened terminal)
       open_mapping = [[<c-t>]],
       -- Default size of terminal
-      size = 50,
-      direction = 'vertical',
+      size = 5,
+      direction = 'horizontal',
       float_opts = {
         border = 'curved',
       },
-    },
+      }
+      local Terminal = require('toggleterm.terminal').Terminal
+      local lazygit = Terminal:new {
+        cmd = 'lazygit --use-config-file=$HOME/.config/lazygit/config.yml',
+        direction = 'float',
+        hidden = true,
+        count = 5,
+        on_open = function(term)
+          vim.api.nvim_buf_set_keymap(term.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
+        end,
+        on_close = function()
+          vim.cmd('startinsert!')
+        end,
+      }
+
+      local function lazygit_toggle()
+        lazygit:toggle()
+      end
+
+      vim.keymap.set('n', '<leader>lg', lazygit_toggle, { noremap = true, silent = true })
+    end,
   },
 }
