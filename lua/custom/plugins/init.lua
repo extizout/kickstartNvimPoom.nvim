@@ -7,6 +7,8 @@ vim.g.neo_tree_remove_legacy_commands = 1
 --- [[ Nightfly Vim.Global]]
 vim.g.nightflyCursorColor = true
 
+vim.g.python3_host_prog = '/bin/python3'
+
 return {
 
   ---------------------Personal NeoVim Keymap ---------------------------------
