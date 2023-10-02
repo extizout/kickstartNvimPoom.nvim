@@ -254,13 +254,13 @@ return {
         },
         automatic_installation = false,
         handlers = {
-          -- function() end, -- disables automatic setup of all null-ls sources
+          function() end, -- disables automatic setup of all null-ls sources
         },
       }
       require('null-ls').setup {
         sources = {
           -- Code Action
-          code_action.eslint_d,
+          -- code_action.eslint_d,
 
           -- Formatter
           formatting.prettierd.with {
