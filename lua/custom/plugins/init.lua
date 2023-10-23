@@ -4,8 +4,6 @@
 
 --- [[ Neo-tree Remove Legacy Command]]
 vim.g.neo_tree_remove_legacy_commands = 1
---- [[ Nightfly Vim.Global]]
-vim.g.nightflyCursorColor = true
 
 vim.g.python3_host_prog = '/bin/python3'
 
@@ -36,8 +34,10 @@ return {
 
     ---------------------Keymap For Neo Tree-----------------------------
 
-    vim.keymap.set('n', '<leader>ot', '<cmd>Neotree focus filesystem left toggle reveal_force_cwd<cr>', { desc = '[O]pen [T]ree Filesystem' }),
-    vim.keymap.set('n', '<leader>of', '<cmd>Neotree focus filesystem float toggle<cr>', { desc = '[O]pen [F]loat Filesystem' }),
+    vim.keymap.set('n', '<leader>ot', '<cmd>Neotree focus filesystem left toggle reveal_force_cwd<cr>',
+      { desc = '[O]pen [T]ree Filesystem' }),
+    vim.keymap.set('n', '<leader>of', '<cmd>Neotree focus filesystem float toggle<cr>',
+      { desc = '[O]pen [F]loat Filesystem' }),
     vim.keymap.set('n', '<leader>og', '<cmd>Neotree show git_status right toggle<cr>', { desc = '[O]pen [G]it Status' }),
   },
 
@@ -56,9 +56,18 @@ return {
     priority = 1000,
     config = function()
       vim.cmd.colorscheme 'nightfly'
+      --- [[ Nightfly Vim.Global]]
+      vim.g.nightflyCursorColor = true
     end,
   },
-
+  {
+    "EdenEast/nightfox.nvim",
+    config = function()
+      vim.cmd.colorscheme 'nightfox'
+      --- [[ Nightfly Vim.Global]]
+      vim.g.nightflyCursorColor = true
+    end,
+  },
   ---------------------Lualine----------------------------------------
 
   {
@@ -326,16 +335,34 @@ return {
   },
   {
     'kevinhwang91/nvim-ufo',
-    dependencies = { 'kevinhwang91/promise-async' },
+    dependencies = {
+      'kevinhwang91/promise-async',
+      {
+        'luukvbaal/statuscol.nvim',
+        config = function()
+          local builtin = require 'statuscol.builtin'
+          require('statuscol').setup {
+            relculright = true,
+            segments = {
+              { text = { builtin.foldfunc },      click = 'v:lua.ScFa' },
+              { text = { '%s' },                  click = 'v:lua.ScSa' },
+              { text = { builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
+            },
+          }
+        end,
+      },
+    },
     config = function()
       vim.o.foldcolumn = '1' -- '0' is not bad
-      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
       vim.o.foldlevelstart = 99
       vim.o.foldenable = true
-
+      vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:>]]
       -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
       vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
       vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+      vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
+      vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith) -- closeAlkkk
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.foldingRange = {
@@ -349,7 +376,24 @@ return {
           -- you can add other fields for setting up lsp server in this table
         }
       end
-      require('ufo').setup()
+      require('ufo').setup {
+        enable_get_fold_virt_text = true,
+        open_fold_hl_timeout = 150,
+        close_fold_kinds = { 'imports', 'comment' },
+        preview = {
+          win_config = {
+            border = { '', '─', '', '', '', '─', '', '' },
+            winhighlight = 'Normal:Folded',
+            winblend = 0,
+          },
+          mappings = {
+            scrollU = '<C-u>',
+            scrollD = '<C-d>',
+            jumpTop = '[',
+            jumpBot = ']',
+          },
+        },
+      }
     end,
   },
 }
