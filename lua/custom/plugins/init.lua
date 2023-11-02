@@ -396,4 +396,5 @@ return {
       }
     end,
   },
+  { "typicode/bg.nvim", lazy = false },
 }
