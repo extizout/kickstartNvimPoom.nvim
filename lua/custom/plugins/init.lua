@@ -20,7 +20,7 @@ return {
     -- Map ESC to exit terminal mode.
     -- vim.keymap.set('t', '<esc>', '<C-\\><C-n>', { desc = '[E]xit terminal mode' }),
     -- Map jk to exit terminal mode.
-    vim.keymap.set('t', 'jk', '<C-\\><C-n>', { desc = '[E]xit terminal mode' }),
+    -- vim.keymap.set('t', 'jk', '<C-\\><C-n>', { desc = '[E]xit terminal mode' }),
 
     -- Map ]t for Change to next tab.
     vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Change to next [t]ab.' }),
