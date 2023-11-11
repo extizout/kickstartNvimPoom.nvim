@@ -491,6 +491,8 @@ local servers = {
   jsonls = {},
   quick_lint_js = {},
   sqlls = {},
+  docker_compose_language_service = {},
+  dockerls = {},
   tsserver = {
     javascript = {
       workspace = { checkThirdParty = false },
