@@ -60,14 +60,6 @@ return {
       vim.g.nightflyCursorColor = true
     end,
   },
-  {
-    "EdenEast/nightfox.nvim",
-    config = function()
-      vim.cmd.colorscheme 'nightfox'
-      --- [[ Nightfly Vim.Global]]
-      vim.g.nightflyCursorColor = true
-    end,
-  },
   ---------------------Lualine----------------------------------------
 
   {
@@ -330,7 +322,7 @@ return {
         lazygit:toggle()
       end
 
-      vim.keymap.set('n', '<leader>lg', lazygit_toggle, { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>lg', lazygit_toggle, { desc = 'lazygit', noremap = true, silent = true })
     end,
   },
   {
@@ -396,5 +388,5 @@ return {
       }
     end,
   },
-  { "typicode/bg.nvim", lazy = false },
+  { 'typicode/bg.nvim', lazy = false },
 }

@@ -89,7 +89,7 @@ require('lazy').setup({
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      { 'folke/neodev.nvim', opts = {} },
     },
   },
 
@@ -491,7 +491,12 @@ local servers = {
   jsonls = {},
   quick_lint_js = {},
   sqlls = {},
-  tsserver = {},
+  tsserver = {
+    javascript = {
+      workspace = { checkThirdParty = false },
+      telemetry = { enable = false },
+    }
+  },
   volar = {},
   lua_ls = {
     Lua = {
