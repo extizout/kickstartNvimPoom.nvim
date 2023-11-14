@@ -495,8 +495,6 @@ local servers = {
   dockerls = {},
   tsserver = {
     javascript = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
     }
   },
   volar = {},

@@ -7,6 +7,10 @@ vim.g.neo_tree_remove_legacy_commands = 1
 
 vim.g.python3_host_prog = '/bin/python3'
 
+vim.o.scrolloff = 9
+
+vim.o.relativenumber = true
+
 return {
 
   ---------------------Personal NeoVim Keymap ---------------------------------
